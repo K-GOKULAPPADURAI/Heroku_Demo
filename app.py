@@ -50,6 +50,7 @@ def parkavi(mp):
     return predict(mp)
     
 app = Flask(__name__)
+app.config['TIMEOUT'] = 180
 
 # Load the trained deep learning model
 
