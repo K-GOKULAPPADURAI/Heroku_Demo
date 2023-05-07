@@ -81,4 +81,8 @@ def index():
     return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    config = CustomConfig()
+    config.set("bind", "0.0.0.0:8080")
+    config.set("workers", 4)
+    app.run(debug=True, host='0.0.0.0', port=8080, threaded=True)
+    
