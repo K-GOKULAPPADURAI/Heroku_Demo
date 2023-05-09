@@ -45,7 +45,7 @@ def parkavi(mp):
             s+=str(i)+':'+str(j)+'\n'
         res=max(dp,key=lambda x:x[1])
         #print('The predicted Disease for the patient was:',res[0],':{:.2f}'.format(res[1]),'%')
-        ss=str(res[0])+':{:.2f}'.format(res[1])+'%'
+        ss=str(res[0])+':{:.2%}'.format(res[1])
         return  ss
     return predict(mp)
     
@@ -64,11 +64,12 @@ def index():
             file.save(file_path)
 
             # Extract audio features using MFCCs
-            predictions = parkavi(file_path)
+            prediction = parkavi(file_path)
             #prediction = np.argmax(prediction)
 
             # Return the prediction as a string
-            return render_template('index.html',prediction=f'The predicted Disease is {predictions}')
+            return render_template('index.html',prediction=f'The predicted Disease is {prediction}')
+
         except Exception as e:
             # Log the error message instead of printing it
             logging.exception('Error occurred while processing file')
