@@ -64,12 +64,11 @@ def index():
             file.save(file_path)
 
             # Extract audio features using MFCCs
-            prediction = parkavi(file_path)
+            predictions = parkavi(file_path)
             #prediction = np.argmax(prediction)
 
             # Return the prediction as a string
-            return f'The predicted Disease is {prediction}'
-
+            return render_template('index.html',prediction=f'The predicted Disease is {predictions}')
         except Exception as e:
             # Log the error message instead of printing it
             logging.exception('Error occurred while processing file')
