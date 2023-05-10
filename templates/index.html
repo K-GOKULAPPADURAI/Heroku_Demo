@@ -1,26 +1,77 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
     <title>Respiratory Disease Prediction</title>
     <style>
-      #output {
-        font-size: 24px;
+      body {
+        font-family: sans-serif;
+        text-align: center;
+      }
+      h1 {
         color: red;
+        font-size: 80px;
+        line-height: 70px;
+        
+      }
+      label {
+        display: block;
+        margin: 40px auto;
+        width: 500px;
+        height: 60px;
+        background-color: green;
+        color: white;
+        font-size:30px;
+        line-height: 60px;
+        text-align: center;
+        cursor: pointer;
+      }
+      input[type="file"] {
+        display: none;
+      }
+      #file-name {
+        margin: 40px auto;
+        width: 500px;
+        font-size: 30px;
+        font-weight: bold;
+        color: black;
+      }
+      #predict-button {
+        display: block;
+        margin: 30px auto;
+        width: 400px;
+        height: 60px;
+        background-color: orange;
+        color: white;
+        font-size: 30px;
+        line-height: 60px;
+        text-align: center;
+        cursor: pointer;
+      }
+      #prediction {
+        margin: 30px auto;
+        width: 700px;
+        font-size: 50px;
+        font-weight: bold;
+        color: blue;
         text-align: center;
       }
     </style>
   </head>
-  <body style="text-align:center;">
-    <h1 style="color:red;">Respiratory Disease Prediction</h1>
-    <form method="POST" enctype="multipart/form-data">
-      <label for="file" style="color:green;">Select an audio file:</label>
-      <input type="file" name="file" id="file" style="color:green;"><br><br>
-      <input type="submit" value="Predict" style="background-color:orange; color:white; font-size:20px;">
+  <body>
+    <h1>Respiratory Disease Prediction</h1>
+    <form action="/" method="post" enctype="multipart/form-data">
+      <label for="file-upload" id="file-upload-label">Choose file</label>
+      <input type="file" name="file" id="file-upload" onchange="showFileName()" />
+      <div id="file-name"></div>
+      <button type="submit" id="predict-button">Predict</button>
     </form>
-    <div id="output"></div>
+    {% if prediction != "" %}
+      <div id="prediction">{{ prediction }}</div>
+    {% endif %}
     <script>
-      function displayResult(result) {
-        document.getElementById('output').textContent = result;
+      function showFileName() {
+        var fileName = document.getElementById("file-upload").files[0].name;
+        document.getElementById("file-name").innerHTML = "Selected file: " + fileName;
       }
     </script>
   </body>
